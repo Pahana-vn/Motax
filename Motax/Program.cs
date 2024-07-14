@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using Motax.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Config Sql Data
+var connectionString = builder.Configuration.GetConnectionString("Motax");
+builder.Services.AddDbContext<MotaxContext>(x => x.UseSqlServer(connectionString));
+
 
 var app = builder.Build();
 
